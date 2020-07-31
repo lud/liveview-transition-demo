@@ -7,7 +7,10 @@ defmodule CsstWeb.PageLive do
       poll_messages()
     end
 
-    socket = assign(socket, :mode, "prepend")
+    socket =
+      socket
+      |> assign(:mode, "prepend")
+      |> assign(:messages, [make_message("Hello")])
 
     {:ok, socket, temporary_assigns: [messages: []]}
   end
@@ -18,6 +21,7 @@ defmodule CsstWeb.PageLive do
 
   defp make_message(id, text) when is_binary(text) do
     %{id: id, text: text}
+    |> IO.inspect()
   end
 
   defp gen_id() do
